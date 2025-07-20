@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Technologies at Use
 
-* [NextJs](https://nextjs.org/)
+* [Next.js](https://nextjs.org/)
 * [Clerk](https://clerk.com/docs/quickstarts/nextjs)
 * [Tailwindcss](https://tailwindcss.com/)
 * [PostgreSql](https://www.postgresql.org/)

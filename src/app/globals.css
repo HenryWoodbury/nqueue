@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --light-background: #ffffff;
+  --light-foreground: var(--color-gray-950);
+  --dark-background: var(--color-zinc-950);
+  --dark-foreground: #ffffff;
+  --light-link-color: var(--color-blue-600);
+  --light-link-color-hover: var(--color-blue-800);
+  --dark-link-color: var(--color-blue-400);
+  --dark-link-color-hover: var(--color-blue-500);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-roboto);
   --font-mono: var(--font-roboto-mono);
+  --background: var(--light-background);
+  --foreground: var(--light-foreground);
+  --color-link: var(--light-link-color);
+  --color-link-hover: var(--light-link-color-hover);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--dark-background);
+    --foreground: var(--dark-foreground);
+    --color-link: var(--dark-link-color);
+    --color-link-hover: var(--dark-link-color-hover);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: sans-serif;
+}
+
+@layer base {
+  a {
+    color: var(--color-link);
+    text-decoration: inherit;
+  }
+  a:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+/* Clerk Styling */
+
+/* Remove shimmer effect from button */
+.cl-internal-cieags {
+  display: none;
 }

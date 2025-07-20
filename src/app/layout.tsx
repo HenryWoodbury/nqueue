@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono } from 'next/font/google'
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
+
+import { ClerkSigned } from "../components/clerk/Signed";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -32,28 +27,24 @@ export default function RootLayout({
 }>) {
   const year = new Date().getFullYear();
   return (
-    <ClerkProvider>
-      <html lang="en">
+    <ClerkProvider
+      appearance={{
+        cssLayerName: 'clerk',
+      }}
+    >
+      <html lang="en" className="h-dvh">
         <head>
           <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         </head>
-        <body className={`${roboto.className} antialiased`}>
+        <body className={`${roboto.className} antialiased flex min-h-full flex-col`}>
           <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton>
-                <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+            <ClerkSigned />
           </header>
-          {children}
-          <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-            <p> 
+          <main className="grow">
+            {children}
+          </main>
+          <footer className="flex p-4 h-16 items-center justify-center">
+            <p className=""> 
               &copy; {year} Henry Woodbury
             </p>
           </footer>

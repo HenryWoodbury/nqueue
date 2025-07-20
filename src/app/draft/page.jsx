@@ -1,11 +1,18 @@
+import Link from 'next/link';
+
 export default function Draft() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1>
-          Draft Room
-        </h1>
-      </main>
-    </div>
+    <div className="p-4">
+      <h1 className="text-xl">
+        Draft Room
+      </h1>
+      <p>
+        Should Draft Room be a dynamic route? Or should it be a dynamically rendered
+        page (always the same URL, always the "most recent" draft for this manager).
+      </p>
+      <p>
+        Back to <Link href={`/`}>Home</Link>.
+      </p>
+    </div>     
   );
 }
