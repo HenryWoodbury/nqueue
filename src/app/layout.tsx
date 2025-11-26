@@ -1,31 +1,33 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next"
 import { Roboto, Roboto_Mono } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 
-import { ClerkSigned } from "../components/clerk/Signed";
-import "./globals.css";
+import Header from "@/components/Header"
+import "./globals.css"
 
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
-});
+})
+
 
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
   subsets: ["latin"],
-});
+})
+
 
 export const metadata: Metadata = {
   title: "Draft Queue",
   description: "A Fantasy Draft Application",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const year = new Date().getFullYear();
+  const year = new Date().getFullYear()
   return (
     <ClerkProvider
       appearance={{
@@ -36,10 +38,8 @@ export default function RootLayout({
         <head>
           <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         </head>
-        <body className={`${roboto.className} antialiased flex min-h-full flex-col`}>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <ClerkSigned />
-          </header>
+        <body className={`${roboto.variable} ${robotoMono.variable} antialiased flex min-h-full flex-col`}>
+          <Header />
           <main className="grow">
             {children}
           </main>
@@ -51,5 +51,5 @@ export default function RootLayout({
         </body>
       </html>
     </ClerkProvider>
-  );
+  )
 }
