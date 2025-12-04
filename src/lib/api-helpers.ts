@@ -37,4 +37,3 @@ export function handlePrismaError(error: unknown): NextResponse {
   console.error('Unexpected error:', error)
   return apiError('An unexpected error occurred', 500)
 }
-

@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Roboto, Roboto_Mono } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 
-import Header from "@/components/Header"
+import { Header } from "@/components/Header"
 import "./globals.css"
 
 const roboto = Roboto({

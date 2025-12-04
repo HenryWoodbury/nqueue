@@ -1,6 +1,7 @@
 export interface Draft {
   id: string
   draftName: string
+  userId: string
   createdAt: Date
   updatedAt: Date
 }

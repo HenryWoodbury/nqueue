@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 
-const Header = () => {
+function Header() {
   const { user } = useUser()
   const userRole = user?.publicMetadata?.role || 'none'
   const isAdmin = userRole === 'admin'
@@ -33,8 +33,6 @@ const Header = () => {
                 <li>
                   <Link href="/profile">Profile</Link>
                 </li>
-              </SignedIn>
-              <SignedIn>
                 <li className="flex items-center">
                   <UserButton />
                 </li>
@@ -52,4 +50,6 @@ const Header = () => {
   )
 }
 
-export default Header
+export {
+  Header
+}

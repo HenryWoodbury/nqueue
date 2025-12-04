@@ -4,13 +4,24 @@ import { useState } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useUser } from "@clerk/nextjs"
 
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 
 export default function Page() {
   const router = useRouter()
   const [draftName, setDraftName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const { isSignedIn, user, isLoaded } = useUser()
+
+  if (!isLoaded) {
+    return <div>Loading...</div>
+  }
+
+  if (!isSignedIn) {
+    return <div>Sign in to view this page</div>
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,6 +58,8 @@ export default function Page() {
       <h1 className="text-xl">
         Create New Draft
       </h1>
+
+      <p>Hello {user.username}!</p>
 
       <form onSubmit={handleSubmit}>
         <label>
