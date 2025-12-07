@@ -17,6 +17,7 @@ export interface UpdateDraftRequest {
 
 export interface ApiError {
   error: string
+  status: number
 }
 
 export interface ApiSuccess<T> {

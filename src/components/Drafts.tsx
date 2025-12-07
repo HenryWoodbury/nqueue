@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Trash2 } from 'lucide-react'
 
 import {useGetDrafts} from '@/hooks/useFetcher'
+import type {GetDraftsApi} from '@/hooks/useFetcher'
 import { LoadingSkeleton } from './Loading'
 import type { Draft } from '@/types/api'
 import {
@@ -17,18 +18,18 @@ import {
 import {  Button } from '@/components/ui/button'
 
 function DraftsList() {
-  const { drafts, isLoading, isError } = useGetDrafts()
+  const { drafts, error, isLoading }: GetDraftsApi = useGetDrafts()
   if (isLoading) return (
     <LoadingSkeleton />
   )
-  if (isError) return (
+  if (error) return (
     <>
       <p>Error</p>
-      <p>{isError.errorMessage}</p>
+      <p>{error.message}</p>
     </>
   )
 
-  if (drafts.length === 0) return (
+  if (!drafts?.length) return (
     <>
       <p>No drafts yet</p>
     </>
