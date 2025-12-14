@@ -14,10 +14,9 @@ export function Upload({ title }: { title: string }) {
     <div className="w-full max-w-md">
       <form>
         <Field>
-          <FieldLabel>{title}</FieldLabel>
+          <FieldLabel htmlFor="file-upload">{title}</FieldLabel>
           <div className="flex w-full justify-center items-center gap-2">
-            
-            <Input type="file" className="block" />
+            <Input id="file-upload" type="file" className="block" />
             <Button variant="outline" className="icon"><CloudUpload /></Button>
           </div>
         </Field>

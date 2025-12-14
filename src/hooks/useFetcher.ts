@@ -3,14 +3,30 @@ import useSWR from 'swr'
 import type { Draft } from '@/types/api'
 import { fetcher } from '@/lib/fetcher'
 
-export type GetDraftsApi = {
+export type DraftPayload = {
+  draft: Draft | undefined,
+  isLoading: boolean,
+  error: Error | undefined
+}
+
+export type DraftsPayload = {
   drafts: Draft[] | undefined,
   isLoading: boolean,
   error: Error | undefined
 }
 
-const useGetDrafts = (id?: string): GetDraftsApi => {
-  const route = id ? `/api/draft/${id}` : `/api/draft`
+const useGetDraft = (id: string): DraftPayload => {
+  const route = `/api/draft/${id}`
+  const { data, error, isLoading } = useSWR<Draft, Error>(route, fetcher)
+  return {
+    draft: data,
+    isLoading,
+    error: error
+  }
+}
+
+const useGetDrafts = (): DraftsPayload => {
+  const route = '/api/draft'
   const { data, error, isLoading } = useSWR<Draft[], Error>(route, fetcher)
   return {
     drafts: data,
@@ -20,5 +36,6 @@ const useGetDrafts = (id?: string): GetDraftsApi => {
 }
 
 export {
+  useGetDraft,
   useGetDrafts,
 }

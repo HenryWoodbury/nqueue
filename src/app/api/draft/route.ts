@@ -5,8 +5,6 @@ import { prisma } from '@/lib/prisma'
 import { apiError, apiSuccess, handlePrismaError } from '@/lib/api-helpers'
 import type { CreateDraftRequest } from '@/types/api'
 
-// These api/draft routes are for when [id] is not a param.
-
 // Get all drafts
 export async function GET() {
   try {

@@ -5,7 +5,7 @@ import type { UpdateDraftRequest } from '@/types/api'
 
 import { apiError, apiSuccess, handlePrismaError } from '@/lib/api-helpers'
 
-export async function GET(request: NextRequest, { params }: { params: { id: string }}) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }>}) {
   try {
     const { userId } = await auth()
 
@@ -13,7 +13,8 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       return apiError('Unauthorized', 401)
     }
 
-    const id = params.id
+    const{ id } = await params
+    
     const draft = await prisma.draft.findUnique({
       where: { id },
     })

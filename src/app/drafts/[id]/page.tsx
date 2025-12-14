@@ -3,29 +3,35 @@
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
-import {useGetDrafts} from '@/hooks/useFetcher'
+import {useGetDraft} from '@/hooks/useFetcher'
 import { LoadingSkeleton } from '@/components/Loading'
 
 export default function Page() {
   const params = useParams()
   const id = params.id ?? ''
-  const { drafts, isLoading, isError } = useGetDrafts(id as string)
+  // TODO -- Don't look for Draft if id is undefined
+  const { draft, isLoading, error } = useGetDraft(id as string)
   if (isLoading) return (
     <LoadingSkeleton />
   )
-  if (isError) return (
+  if (error) return (
     <>
       <p>Error</p>
-      <p>{isError.errorMessage}</p>
+      <p>{error.message}</p>
     </>
   )
-
+  if (!draft) return (
+    <>
+      <p>Draft not found</p>
+      <p>Draft {id} not found</p>
+    </>
+  )
   return (
     <div className="p-4">
       <h1 className="text-xl">
         Draft Page
       </h1>
-      <p>Page for {drafts.draftName}</p>
+      <p>Page for {draft.draftName}</p>
       <p>
         <Link href={`/`}>Home</Link>
       </p>
