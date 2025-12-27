@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server'
 import { auth } from '@clerk/nextjs/server'
-import { prisma } from '@/lib/prisma'
+import prisma from '@/lib/prisma'
 import type { UpdateDraftRequest } from '@/types/api'
 
 import { apiError, apiSuccess, handlePrismaError } from '@/lib/api-helpers'

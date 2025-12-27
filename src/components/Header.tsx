@@ -10,9 +10,9 @@ function Header() {
 
   return (
     <header className="border-b bg-white">
-      <div className="container mx-auto px-4">
+      <div className="px-6">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold items-left">
             Draft Canvas
           </Link>
           <nav>
@@ -38,8 +38,10 @@ function Header() {
                 </li>
               </SignedIn>
               <SignedOut>
-                <li className="flex items-center outline">
-                  <SignInButton mode="modal" />
+                <li className="flex">
+                  <SignInButton mode="modal">
+                    <Link href="#">Sign In</Link>
+                  </SignInButton>
                 </li>                
               </SignedOut>
             </ul>

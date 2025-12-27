@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Dialog,
   DialogContent,
@@ -8,7 +10,13 @@ import {
 } from "@/components/ui/dialog"
 import { Upload } from '@/components/Upload'
 
+import type { PlayerUniverseCsvFields } from '@/types/api'
+
 export default function Admin() {
+  // Do something with the result
+  const onSuccess = (result: PlayerUniverseCsvFields[]) => {
+    console.log(result)
+  }
   return (
     <div className="p-4">
       <h1 className="text-xl">
@@ -24,7 +32,8 @@ export default function Admin() {
             Upload draft eligibile players. This should be a CSV file ... 
           </DialogDescription>
           <div className="w-full h-full grow overflow-auto">
-            <Upload title="Player Universe" />
+            <h2>Player Universe</h2>
+            <Upload endpoint='/api/admin/players' successCallback={onSuccess} />
           </div>
         </DialogContent>
       </Dialog>      

@@ -1,12 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
+  engineType = "client"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
 }
 
 model Draft {
@@ -18,4 +16,19 @@ model Draft {
 
   @@map("drafts")
   @@index([userId])
+}
+
+model PlayerUniverse {
+  id          String   @id @default(cuid())
+  ottoneuId   String   @unique
+  name        String
+  fangraphsId String?
+  mlbamId     String?
+  birthday    String?
+  positions   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("player_universe")
+  @@index([ottoneuId])
 }

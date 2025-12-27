@@ -1,10 +1,12 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
-const isAdminRoute = createRouteMatcher(['/admin(.*)'])
+const isAdminRoute = createRouteMatcher([
+  '/admin(.*)',
+  '/api/admin(.*)',
+])
 
 export default clerkMiddleware(async (auth, req) => {
-  // Don't forget the clerk Customize session token step
   const userRole = (await auth()).sessionClaims?.metadata?.role
 
   if (isAdminRoute(req) && !(userRole === 'admin')) {
