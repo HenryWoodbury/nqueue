@@ -8,14 +8,30 @@ datasource db {
 }
 
 model Draft {
-  id        String   @id @default(cuid())
-  draftName String
-  userId    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String     @id @default(cuid()) // Draft has its own ID
+  description  String?    // Unique to Draft
+  leagueId     String?
+  parentLeague League?    @relation("LeagueToDrafts", fields: [leagueId], references: [id])
+  status       String     @default("draft") // e.g., "draft", "published", "active", etc.
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@map("drafts")
-  @@index([userId])
+}
+
+model League {
+  id            String   @id @default(cuid())
+  name          String
+  clerkOrgId    String   @unique 
+  commissioner  String   // Clerk User ID (for initial creator tracking)
+  description   String?
+  drafts        Draft[]  @relation("LeagueToDrafts")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("leagues")
+  @@index([clerkOrgId])
+  @@index([commissioner])
 }
 
 model PlayerUniverse {

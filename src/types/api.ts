@@ -1,13 +1,36 @@
 export interface Draft {
   id: string
-  draftName: string
-  userId: string
+  name: string
+  description: string | null
   createdAt: Date
   updatedAt: Date
 }
 
 export interface CreateDraftRequest {
   draftName: string
+  leagueId?: string
+  leagueName?: string
+}
+
+export interface UpdateDraftRequest {
+  id: string
+  draftName: string
+}
+
+export interface League {
+  id: string
+  name: string
+  clerkOrgId: string
+  description: string | null
+  commissioner: string
+  drafts: Draft[]
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface CreateLeagueRequest {
+  leagueName: string
+  leagueId: string
 }
 
 export interface UpdateDraftRequest {

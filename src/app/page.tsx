@@ -4,10 +4,10 @@ import Link from 'next/link'
 
 import { SignedIn, SignedOut, SignInButton, useUser } from "@clerk/nextjs"
 
-import { DraftsList } from '@/components/Drafts'
+import { LeaguesList } from '@/components/Leagues'
 import { Button } from '@/components/ui/button'
 export default function Page() {
-  const { isSignedIn, user, isLoaded } = useUser()
+  const { user } = useUser()
 
   return (
     <div className="px-6 py-4">
@@ -17,12 +17,9 @@ export default function Page() {
             Hello {user?.username}!
           </h1>
 
-          <DraftsList />
+          <LeaguesList />
           <p>
-            <Link href={`/create`}>Create a New Draft</Link>
-          </p> 
-          <p>
-            <Link href={`/create`}>Create a New League</Link>
+            <Link href={`/league/create`}>Create a New League</Link>
           </p> 
         </>
       </SignedIn>

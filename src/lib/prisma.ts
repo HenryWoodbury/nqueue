@@ -14,12 +14,13 @@ const prismaClientSingleton = () => {
   if (isAccelerate) {
     // Production: Use Prisma Accelerate
     // Only import when actually needed to avoid validation errors
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { withAccelerate } = require('@prisma/extension-accelerate')
     const extendedClient = new PrismaClient({
       accelerateUrl: databaseUrl 
     }).$extends(withAccelerate())
     // Cast to PrismaClient to preserve model access while keeping Accelerate functionality
-    return extendedClient as any as PrismaClient
+    return extendedClient as unknown as PrismaClient
   } else {
     // Local development: Use pg adapter (no Accelerate)
     // PrismaPg can accept connectionString directly or a Pool instance
@@ -29,11 +30,10 @@ const prismaClientSingleton = () => {
 }
 
 declare global {
-  // eslint-disable-next-line no-var
   var prisma: undefined | PrismaClient
 }
 
-const prisma = (globalThis.prisma ?? prismaClientSingleton()) as PrismaClient
+const prisma = globalThis.prisma ?? prismaClientSingleton()
 
 if (process.env.NODE_ENV !== 'production') globalThis.prisma = prisma
 

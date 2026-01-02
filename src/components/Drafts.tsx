@@ -35,6 +35,8 @@ function DraftsList() {
     </>
   )
 
+  // TODO: Retrieve League Name
+
   return (
     <>
       <p>
@@ -48,6 +50,9 @@ function DraftsList() {
             </TableHead>
             <TableHead>
               Draft Name
+            </TableHead>
+            <TableHead>
+              League Id
             </TableHead>
             <TableHead>
               Created Date
@@ -70,8 +75,11 @@ function DraftsList() {
               </TableCell>
               <TableCell>
                 <Link href={`/drafts/${draft.id}`}>
-                  {draft.draftName}
+                  {draft.name}
                 </Link>
+              </TableCell>
+              <TableCell>
+                {draft.leagueId}
               </TableCell>
               <TableCell>
                 {new Date(draft.createdAt).toDateString()}

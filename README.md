@@ -64,7 +64,7 @@ This setup script uses docker to host the PostgreSQL development database. Modif
    ```bash
    npm run db:setup
    ```   
-   This will create the `drafts` table in your database.
+   This will create the needed tables in your database.
 
 1. **Start the development server:**
    ```bash
@@ -89,6 +89,7 @@ This setup script uses docker to host the PostgreSQL development database. Modif
 - `npm run db:migrate` - Run database migrations
 - `npm run db:studio` - Open Prisma Studio database GUI (http://localhost:5555)
 - `npm run db:push` - Push schema changes to database (without migrations)
+- `npx prisma migrate reset` - Reset the database
 
 ## Technologies at Use
 
@@ -96,5 +97,3 @@ This setup script uses docker to host the PostgreSQL development database. Modif
 * [Clerk](https://clerk.com/docs/quickstarts/nextjs)
 * [Tailwindcss](https://tailwindcss.com/)
 * [PostgreSql](https://www.postgresql.org/)
-
-
